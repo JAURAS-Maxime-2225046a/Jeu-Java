@@ -25,7 +25,7 @@ public class Coffre {
 
     public void etatCoffre(boolean etat){
         if(etat){
-            System.out.println("\nLe coffre est ouvert !\n");
+            System.out.println("\nLe coffre est ouvert !");
         }
         else {
             System.out.println("\nLe coffre est fermé !\n");

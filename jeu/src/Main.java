@@ -13,7 +13,9 @@ public class Main {
         new Mur(5,5), new Mur(5,6), new Mur(4,5), new Mur(4,6), new Mur(1,8), new Mur(2,8), 
         new Mur(7,8), new Mur(8,8), new Mur(2,1), new Mur(2,2), new Mur(2,3), new Mur(3,3)};
 
-    Coffre[] coffres = { new Coffre(1,7,false), new Coffre(6,1,false)}; 
+    Coffre[] coffres = { new Coffre(1,7,false), new Coffre(6,1,false), new Coffre(8,4,false)}; 
+
+    Potion[] potions = { new Potion(1,7)};
 
     Monstres[] monstres = { new Monstres("Monstre1",1,4,70,50,40,0), 
     new Monstres("Monstre2",3,7,70,50,40,0)};
@@ -29,7 +31,7 @@ public class Main {
         if(inout.isChoixPret()){
             Map map1 = new Map (10,10,murs,hero1,boss,monstres,coffres);
             map1.afficheMap();
-            inout.deplacement_hero(sc1,hero1,map1,monstres,combat1,boss,coffres);
+            inout.deplacement_hero(sc1,hero1,map1,monstres,combat1,boss,coffres,potions);
         }
         sc1.close();
     }

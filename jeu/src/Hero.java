@@ -1,8 +1,9 @@
-//import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Hero extends Personnage {
 	private int exp;
 	private Position position;
+	private ArrayList<Potion> potion = new ArrayList<Potion>();
 	/*
 	private int arme; //Arme[] inventaire_arme = new Arme[2];
 	private int artefacts; //Artefacts[] inventaire_artefacts = new Artefacts[3];
@@ -40,6 +41,35 @@ public class Hero extends Personnage {
 			setVelocite(getVelocite()+1);
 	}
 
+	public void deplacer(int deplacement) {
+		switch (deplacement) {
+		case 1 :
+			getPosition().setY(getPosition().getY()-1); 
+			break;
+		case 2 :
+			getPosition().setY(getPosition().getY()+1); 
+			break;	
+		case 3 :
+			getPosition().setX(getPosition().getX()+1);
+		 	break;
+		case 4 :
+			getPosition().setX(getPosition().getX()-1); 
+			break;					
+		}
+    }
+
+	public String toString(){
+		return "Vie du perso = " + getPv() + "\nexp = " + exp + "\nAttaque = " + getAttaque() + "\nDéfense = " + getDefense();
+	}
+
+	public ArrayList<Potion> getPotion() {
+		return potion;
+	}
+
+	public void setPotion(ArrayList<Potion> potion) {
+		this.potion = potion;
+	}
+
 	/* 
 	public int getArme() {
 		return arme;
@@ -73,25 +103,4 @@ public class Hero extends Personnage {
 		this.porter = porter;
 	}
 	*/
-
-	public void deplacer(int deplacement) {
-		switch (deplacement) {
-		case 1 :
-			getPosition().setY(getPosition().getY()-1); 
-			break;
-		case 2 :
-			getPosition().setY(getPosition().getY()+1); 
-			break;	
-		case 3 :
-			getPosition().setX(getPosition().getX()+1);
-		 	break;
-		case 4 :
-			getPosition().setX(getPosition().getX()-1); 
-			break;					
-		}
-    }
-
-	public String toString(){
-		return "Vie du perso = " + getPv() + "\nexp = " + exp + "\nAttaque = " + getAttaque() + "\nDéfense = " + getDefense();
-	}
 }

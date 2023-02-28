@@ -59,12 +59,12 @@ public class Conversation {
         }
     }
 
-    public void lancementCombat(Hero hero1, Personnage p1, Combat combat1){
+    public void lancementCombat(Scanner in,Hero hero1, Personnage p1, Combat combat1){
         System.out.println("\n====================Un combat va se lancer !=====================\n");
-        combat1.combat(hero1,p1);
+        combat1.combat(in,hero1,p1);
     }
 
-    public void deplacement_hero(Scanner in, Hero hero1, Map map1, Monstres[] monstres, Combat combat1, Boss boss, Coffre[] coffres){  
+    public void deplacement_hero(Scanner in, Hero hero1, Map map1, Monstres[] monstres, Combat combat1, Boss boss, Coffre[] coffres, Potion[] potions){  
         //System.out.println("Monstre position 0 : " + monstres[0] + "\n"); 
         boolean choixDeplacement = true;
         while(choixDeplacement){
@@ -91,14 +91,14 @@ public class Conversation {
                             map1.afficheMap();
                             if(map1.estMonstre(hero1.getPosition())){ 
                                 if(hero1.getPosition().identique(monstres[0].getPosition())){
-                                    lancementCombat(hero1, monstres[0],combat1);
+                                    lancementCombat(in,hero1, monstres[0],combat1);
                                     if(hero1.getPv() == 0){
                                         choixDeplacement = false;
                                     }
                                     map1.afficheMap();
                                 }
                                 else {
-                                    lancementCombat(hero1, monstres[1],combat1);
+                                    lancementCombat(in, hero1, monstres[1],combat1);
                                     if(hero1.getPv() == 0){
                                         choixDeplacement = false;
                                     }
@@ -106,52 +106,45 @@ public class Conversation {
                                 }
                             }
                             else if (map1.estCoffre(hero1.getPosition())){
-                                if((coffres[0].getPosition().identique(hero1.getPosition()) && coffres[0].isEtat() == false) || (coffres[1].getPosition().identique(hero1.getPosition()) && coffres[1].isEtat() == false)){
-                                    System.out.println("\n==================================\n"+ 
-                                    "| Voulez vous ouvrir le coffre ? |\n"+ 
-                                    "| 1 : Oui                        |\n"+ 
-                                    "| 2 : Non                        |\n"+ 
-                                    "==================================\n");
-                                    int ouvertureCoffre = in.nextInt();
-                                    switch(ouvertureCoffre){
-                                        case 1 :
-                                            if (coffres[0].getPosition().identique(hero1.getPosition())){
-                                                coffres[0].setEtat(true);
-                                                coffres[0].etatCoffre(coffres[0].isEtat());
+                                for (int i = 0; i < coffres.length; i++){
+                                    if(hero1.getPosition().identique(coffres[i].getPosition()) && coffres[i].isEtat() == false){
+                                        System.out.println("\n==================================\n"+ 
+                                        "| Voulez vous ouvrir le coffre ? |\n"+ 
+                                        "| 1 : Oui                        |\n"+ 
+                                        "| 2 : Non                        |\n"+ 
+                                        "==================================\n");
+                                        int ouvertureCoffre = in.nextInt();
+                                        switch(ouvertureCoffre){
+                                            case 1 :
+                                                    coffres[i].setEtat(true);
+                                                    coffres[i].etatCoffre(coffres[0].isEtat());
+                                                    if(map1.estCoffre(potions[0].getPosition())){
+                                                        System.out.println("\n=====================================\n"+ 
+                                                        "| Vous venez de ramasser une potion |\n"+ 
+                                                        "=====================================\n");
+                                                        hero1.getPotion().add(potions[0]);
+                                                    }
+                                                    choixDeplacement = true;
+                                                    map1.afficheMap();
+                                            break;
+    
+                                            case 2 :
+                                                    coffres[i].etatCoffre(coffres[i].isEtat());
+                                                    choixDeplacement = true;
+                                                    map1.afficheMap();
+                                            break;
+    
+                                            default:   
+                                                System.out.println("\nMauvaise entrée.\nRéessaies, tu peux y arriver ;)");
                                                 choixDeplacement = true;
                                                 map1.afficheMap();
-                                            }
-                                            else {
-                                                coffres[1].setEtat(true);
-                                                coffres[1].etatCoffre(coffres[1].isEtat());
-                                                choixDeplacement = true;
-                                                map1.afficheMap();
-                                            }
-                                        break;
-
-                                        case 2 :
-                                            if (coffres[0].getPosition().identique(hero1.getPosition())){
-                                                coffres[0].etatCoffre(coffres[0].isEtat());
-                                                choixDeplacement = true;
-                                                map1.afficheMap();
-                                            }
-                                            else {
-                                                coffres[1].etatCoffre(coffres[1].isEtat());
-                                                choixDeplacement = true;
-                                                map1.afficheMap();
-                                            }
-                                        break;
-
-                                        default:   
-                                            System.out.println("\nMauvaise entrée.\nRéessaies, tu peux y arriver ;)");
-                                            choixDeplacement = true;
-                                            map1.afficheMap();
+                                        }
                                     }
                                 }
                             }
                             else if(map1.estBoss(hero1.getPosition())){
                                 choixDeplacement = false;
-                                lancementCombat(hero1,boss,combat1);
+                                lancementCombat(in,hero1,boss,combat1);
                             }
                             else {
                                 choixDeplacement = true;
