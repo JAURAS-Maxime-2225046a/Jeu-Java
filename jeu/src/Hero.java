@@ -1,39 +1,28 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Hero extends Personnage {
-	private String nom;
-	private String deplacement;
 	private int exp;
+	private Position position;
+	/*
 	private int arme; //Arme[] inventaire_arme = new Arme[2];
 	private int artefacts; //Artefacts[] inventaire_artefacts = new Artefacts[3];
 	private int potion; //Potion[] inventaire_potion = new Potion[5];
 	private boolean porter = false;
-	
-	public Hero(int exp, int x, int y, int attaque, int defense, int pv) {
-		super(x, y, attaque, defense, pv);
-		this.exp = exp; 
-	}
-	
-	public String getNom() {
-		return nom;
+	*/
+
+	public Hero(String nom, int exp, int x, int y, int attaque, int defense, int pv, int velocite) {
+		super(nom, x, y, attaque, defense, pv, velocite);
+		this.exp = exp;
+		this.position = new Position(x,y);
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public Position getPosition() {
+		return position;
 	}
 
-	public void deplacer() {
-		switch (deplacement) {
-		case "haut":
-			this.setY(this.getY() - 1); break;
-		case "bas":
-			this.setY(this.getY() + 1); break;
-		case "droite":
-			this.setX(this.getX() + 1); break;
-		case "gauche":
-			this.setX(this.getX() - 1); break;					
-		}
-    }
+	public void setPosition(Position position) {
+		this.position = position;
+	}
 
 	public int getExp() {
 		return exp;
@@ -43,6 +32,15 @@ public class Hero extends Personnage {
 		this.exp = exp;
 	}
 
+	public void ameliorationAttribut(int exp, int attaque, int defense, int pv, int velocite){
+			setExp(getExp()+1);
+			setAttaque(getAttaque()+5);
+			setDefense(getDefense()+5);
+			setPv(getPv()+5);
+			setVelocite(getVelocite()+1);
+	}
+
+	/* 
 	public int getArme() {
 		return arme;
 	}
@@ -74,14 +72,26 @@ public class Hero extends Personnage {
 	public void setEst_porter(boolean porter){
 		this.porter = porter;
 	}
+	*/
 
-	public void demander_nom(){
-		String name;
-        Scanner in = new Scanner(System.in);
-		System.out.println("Tu dois donner un nom à ton héros : ");
-        name = in.next();
-        in.close();
-		this.setNom(name);
-		System.out.println("Votre nom est : " + this.getNom() + "\n");
+	public void deplacer(int deplacement) {
+		switch (deplacement) {
+		case 1 :
+			getPosition().setY(getPosition().getY()-1); 
+			break;
+		case 2 :
+			getPosition().setY(getPosition().getY()+1); 
+			break;	
+		case 3 :
+			getPosition().setX(getPosition().getX()+1);
+		 	break;
+		case 4 :
+			getPosition().setX(getPosition().getX()-1); 
+			break;					
+		}
+    }
+
+	public String toString(){
+		return "Vie du perso = " + getPv() + "\nexp = " + exp + "\nAttaque = " + getAttaque() + "\nDéfense = " + getDefense();
 	}
 }
