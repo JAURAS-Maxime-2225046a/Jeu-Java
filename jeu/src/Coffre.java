@@ -1,14 +1,14 @@
 public class Coffre {
-    private boolean etat;
+    private boolean etat = false;
     private Position position;
 
-    public Coffre(Position position, boolean etat) {
+    public Coffre(Position position) {
         this.position = position;
-        this.etat = etat;
     }
 
-    public Coffre(int x, int y ){
+    public Coffre(int x, int y, boolean etat){
         this.position = new Position(x, y);
+        this.etat = etat;
     }   
 
     public Position getPosition() {
@@ -21,6 +21,15 @@ public class Coffre {
 
     public void setEtat(boolean etat) {
         this.etat = etat;
+    }
+
+    public void etatCoffre(boolean etat){
+        if(etat){
+            System.out.println("\nLe coffre est ouvert !\n");
+        }
+        else {
+            System.out.println("\nLe coffre est fermé !\n");
+        }
     }
 	
 }

@@ -19,7 +19,7 @@ public class Combat {
                     hero1.setAttaque(heroAttaque);
                     System.out.println(hero1.getNom() + ", votre expérience de combat augmente avec vos attributs !\n");
                     hero1.ameliorationAttribut(hero1.getExp(), hero1.getAttaque(), hero1.getDefense(), heroPv, hero1.getVelocite());
-                    System.out.println(hero1.getNom() + ", voici vos nouvelles capacités :\n\n" + hero1.toString());
+                    System.out.println(hero1.getNom() + ", voici vos nouvelles capacités :\n\n" + hero1.toString() + "\n");
                 }
                 else {
                     System.out.println("\nVous êtes attaqués :");
